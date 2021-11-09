@@ -113,3 +113,7 @@ def User_Friend(size, df_User):
         df.at[index, 'friends'] = list(set(temp))
 
     return df
+
+
+
+#clablcankbfguobspzoègejnrws
