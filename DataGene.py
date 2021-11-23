@@ -42,7 +42,8 @@ def UsersGenerator(size):
 
 
 def TaskGenerator(size):
-    activity_label = ['Localization', 'Classify', 'Counting', 'Ordering']
+    # activity_label = ['Localization', 'Classify', 'Counting', 'Ordering']
+    activity_label = ['Localization', 'Ordering', 'Ordering', 'Ordering']
 
     task_label_cars = ['Ferrari', 'Lamborghini', 'Tesla', 'Ford', 'Fiat', 'BMW', 'VW', 'Citroen', 'Seat', 'Alfa Romeo',
                        'Bugatti', 'Rivian', 'Mini', 'Range Rover', 'Porsche']
@@ -114,6 +115,4 @@ def User_Friend(size, df_User):
 
     return df
 
-
-
-#clablcankbfguobspzoègejnrws
+user, task, full = User_Task(100)
