@@ -8,16 +8,23 @@
 # @software: PyCharm 
 # Import Libs and Let's get started, shall we?
 from LoadData import *
+import numpy as np
+from sklearn.preprocessing import normalize
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import cartopy.crs as ccrs
 import cartopy.io.shapereader as shpreader
 
-def degree_user_map(G):
+def degree_user_map(G, full):
     labels = {}
+    nodes = []
     for i in range(len(G.nodes())-1):
         labels[i] = f'index: {i}'
     degree_sequence = [d for n, d in G.degree()]
+    node_size = norm(degree_sequence)
+    print(node_size)
+    for i in range(len(G.nodes())):
+        nodes.append(node_size[i] * 200)
     dmax = max(degree_sequence)
     fig = plt.figure("Degree of a random graph", figsize=(8, 8))
     # Create a gridspec for adding subplots of different sizes
@@ -25,7 +32,7 @@ def degree_user_map(G):
     ax0 = fig.add_subplot(axgrid[0:3, :])
     Gcc = G.subgraph(sorted(nx.connected_components(G), key=len, reverse=True)[0])
     pos = nx.spring_layout(Gcc, seed=10396953)
-    nx.draw_networkx_nodes(Gcc, pos, ax=ax0, node_size=20)
+    nx.draw_networkx_nodes(Gcc, pos, ax=ax0, node_size=nodes)
     nx.draw_networkx_edges(Gcc, pos, ax=ax0, alpha=0.4)
     nx.draw_networkx_labels(Gcc, pos, ax=ax0, alpha=0.4, labels=labels)
     ax0.set_title("Connected components of G")
@@ -43,6 +50,15 @@ def degree_user_map(G):
 
     fig.tight_layout()
     plt.show()
+
+
+def norm(nums):
+    output = []
+    num_min, num_max = min(nums), max(nums)
+    for i in nums:
+        output.append((i - num_min) / (num_max - num_min))
+    return output
+
 
 
 

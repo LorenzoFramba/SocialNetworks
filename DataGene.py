@@ -116,3 +116,4 @@ def User_Friend(size, df_User):
     return df
 
 user, task, full = User_Task(100)
+print(full.head(5))
